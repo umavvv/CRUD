@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<body>
+<img th:src="@{https://u.livelib.ru/reader/OlgaZadvornova/o/ur6yq2cz/o-o.jpeg}" width="195" height="130">
+
+<div th:switch="${books}">
+    <h2 th:case="null">No users found!</h2>
+    <div th:case="*">
+        <h2>Books</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Name Book</th>
+                <th>Price</th>
+                <th>Author</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.nameBook}"></td>
+                <td th:text="${book.price}"></td>
+                <td th:text="${book.author}"></td>
+                <td><a th:href="@{book-update/{id}(id=${book.id})}">Edit</a></td>
+                <td><a th:href="@{book-delete/{id}(id=${book.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/book-create">Create book</a></p>
+</div>
+</body>
+</html>
